@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
 
   const payload = {
     chat_id: process.env.TELEGRAM_CHAT_ID,
-    text: `New message from ${nameValue} (${emailValue}) via DJKaset: ${messageValue || 'unspecified'}, Date of the event: ${dateValue || 'unspecified'}, Budget: ${budgetValue || 'unspecified'}`,
+    text: `New message from ${nameValue} (${emailValue}) via DJKaset: ${messageValue || 'unspecified'}, Date of the event: ${dateValue || 'unspecified'}, Budget: '$${budgetValue || 'unspecified'}`,
   };
 
   try {

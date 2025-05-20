@@ -116,12 +116,12 @@ function selectImage(index) {
 }
 
 imagesFrame.querySelector('.closer').addEventListener('click', () => {
-  imagesFrame.classList.remove('visible');
-  removeListeners();
-  removeListeners = null;
+  closeModalFunction();
 })
 
 function closeModalFunction() {
+  currentImage = 0;
+  imagesFrame.querySelector('img').src = null;
   imagesFrame.classList.remove('visible');
   removeListeners();
   removeListeners = null;
