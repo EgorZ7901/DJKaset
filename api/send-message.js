@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
     return res.status(405).send('Method Not Allowed');
   }
 
-  const { emailValue, nameValue, messageValue, dateValue, budgetValue } = req.body.message;
+  const { emailValue, nameValue, messageValue, dateValue, budgetValue, clientId } = req.body.message;
 
   if (!emailValue || !nameValue) {
     return res.status(400).json({ error: 'Name and email are required.' });
