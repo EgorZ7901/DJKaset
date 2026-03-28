@@ -14,6 +14,9 @@ const imagesFrame = document.querySelector('.js-image-opener');
 const images = document.querySelectorAll('.gallery-grid .diamond');
 let removeListeners = null;
 let isSent = false;
+const banner = document.getElementById('cookie-banner');
+const acceptBtn = document.getElementById('cookie-accept');
+const COOKIE_KEY = 'cookie_consent';
 
 const scrollToTopBtn = document.querySelector('.js-back-button');
 
@@ -24,6 +27,20 @@ window.onscroll = function() {
     scrollToTopBtn.style.opacity = '0';
   }
 };
+
+function getClientId() {
+  const match = document.cookie.match(/_ga=GA\d+\.\d+\.(.+)/);
+  return match ? match[1] : null;
+}
+
+if (!localStorage.getItem(COOKIE_KEY)) {
+  banner.classList.remove('hidden');
+}
+
+acceptBtn.addEventListener('click', () => {
+  localStorage.setItem(COOKIE_KEY, 'accepted');
+  banner.classList.add('hidden');
+});
 
 scrollToTopBtn.onclick = function() {
   window.scrollTo({
@@ -134,6 +151,7 @@ async function sendData() {
     dateValue: dateInput.value.trim(),
     budgetValue: budgetInput.value.trim(),
     messageValue: messageInput.value.trim(),
+    clientId: getClientId(),
   }
 
 

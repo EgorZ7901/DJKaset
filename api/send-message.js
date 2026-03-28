@@ -1,3 +1,4 @@
+const { trackEvent } = require('./google-event');
 const axios = require('axios');
 
 module.exports = async (req, res) => {
@@ -21,8 +22,27 @@ module.exports = async (req, res) => {
   try {
     await axios.post(telegramApiUrl, payload, { timeout: 8000 });
     res.status(200).json({ success: true });
+    await trackEvent({
+      clientId,
+      name: 'form_sent_successes',
+      params: {
+        form_name: 'dj_signup',
+        method: 'api',
+        email: emailValue,
+      }
+    });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ error: 'Failed to send message' });
+    await trackEvent({
+      clientId,
+      name: 'form_sent_error',
+      params: {
+        form_name: 'dj_signup',
+        method: 'api',
+        email: emailValue,
+        error: error.message,
+      }
+    });
   }
 };
