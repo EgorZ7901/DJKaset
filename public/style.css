@@ -365,8 +365,7 @@ body {
 
 @media (max-width: 1200px) {
     .cookie-banner {
-        left: unset;
-        right: 10px;
+        left: 10px;
         bottom: 10px;
     }
 
